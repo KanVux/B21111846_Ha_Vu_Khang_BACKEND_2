@@ -24,13 +24,13 @@ const ApiError = require("../api-error");
 //     res.send({ message: "delete handler" });
 // };
 
-exports.deleteAll = (req, res) => {
-    res.send({ message: "deleteAll handler" });
-};
+// exports.deleteAll = (req, res) => {
+//     res.send({ message: "deleteAll handler" });
+// };
 
-exports.findAllFavorite = (req, res) => {
-    res.send({ message: "findAllFavorite handler" });
-};
+// exports.findAllFavorite = (req, res) => {
+//     res.send({ message: "findAllFavorite handler" });
+// };
 
 exports.create = async(req, res, next) => {
     if (!req.body?.name) {
@@ -52,16 +52,16 @@ exports.findAll = async (req, res, next) => {
     let documents = [];
 
     try {
-        const ContactService = new ContactService(MongoDB.client);
+        const contactService = new ContactService(MongoDB.client);
         const {name} = req.query;
         if (name) {
             documents = await contactService.findByName(name);
         } else {
-            documents = await ContactService.find({});
+            documents = await contactService.find({});
         }
     } catch (error) {
         return next(
-            new ApiError(500, "An error occurred whle retrieving contacts")
+            new ApiError(500, "An error occurred while retrieving contacts")
         );
     }
     return res.send(documents);

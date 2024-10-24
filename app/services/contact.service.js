@@ -28,7 +28,7 @@ class ContactService {
             { $set: { favorite: contact.favorite === true } },
             { returnDocument: "after", upsert: true}
         );
-        return result.value;
+        return result;
     }
 
     async find(filter){
