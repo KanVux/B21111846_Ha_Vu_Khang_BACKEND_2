@@ -1,4 +1,4 @@
-const { ObjectId } = require("mongodb");
+const { ObjectId, ReturnDocument } = require("mongodb");
 
 class ContactService {
 
@@ -56,9 +56,9 @@ class ContactService {
         const result = await this.Contact.findOneAndUpdate(
             filter,
             { $set: update },
-            { returnDocument: "after" }
+            { ReturnDocument: "after" }
         );
-        return result.value;
+        return result;
     }
 
     async delete(id){
