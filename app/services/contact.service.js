@@ -1,6 +1,7 @@
 const { ObjectId } = require("mongodb");
 
 class ContactService {
+
     constructor(client) {
         this.Contact = client.db().collection("contacts");
     }
@@ -15,7 +16,7 @@ class ContactService {
         };
 
         Object.keys(contact).forEach(
-            (key) => contact[key] === underfined && delete contact[key]
+            (key) => contact[key] === undefined && delete contact[key]
         );
         return contact;
     }
@@ -27,7 +28,7 @@ class ContactService {
             { $set: { favorite: contact.favorite === true } },
             { returnDocument: "after", upsert: true}
         );
-        return result;
+        return result.value;
     }
 
     async find(filter){
